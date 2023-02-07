@@ -82,14 +82,19 @@ function goodsTotalPrice (userId) {
     console.log(totalPrice)
 }
 
+goodsTotalPrice(0)
 addGood(0, 5, 'S', 2)
 console.log(bucket)
+goodsTotalPrice(0)
+
 deleteGood(0, 2)
 console.log(bucket)
+goodsTotalPrice(0)
+
+
+goodsTotalPrice(1)
 clearBucket(1)
 console.log(bucket)
-
-goodsTotalPrice(0)
 goodsTotalPrice(1)
 
 

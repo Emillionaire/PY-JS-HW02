@@ -63,8 +63,6 @@ function addGood (good, amount) {
 
     for (i = 0; i < basket.length; i++) {
         if (iter.good == basket[i].good) {
-            console.log(basket[i].amount)
-            console.log(iter.amount)
             basket[i].amount += iter.amount
             break;
         } else if (i + 1 == basket.length) {

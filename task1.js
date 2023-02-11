@@ -1,13 +1,28 @@
-function simpleNumber (quantityNumber) {
-    let arr = [];
+function primeNumber (quantityNumber) {
+    // True boolean massive creator
+    let booleanMassive = [];
     for (let i = 0; i < quantityNumber; i++) {
-        if (i % 2 === 0) {
-            continue;
-        } else {
-            arr.push(i);
+        booleanMassive.push(true);
+    }
+    
+    // Algorithm "Sieve of Eratosthenes"
+    for (let i = 2; i**2 <= quantityNumber; i++) {
+        if (booleanMassive[i] == true) {
+            for (k = 0, j = i**2 + k*i; j <= quantityNumber; k++, j = i**2 + k*i) {
+                booleanMassive[j] = false;
+            }
         }
     }
-    return arr;
+
+    // Prime number massive creator
+    let simpleMassive = [];
+    for (let i = 2; i < booleanMassive.length; i++) {
+        if (booleanMassive[i] == true) {
+            simpleMassive.push(i);
+        }
+    }
+
+    return simpleMassive;
 };
 
-console.log(simpleNumber (process.argv[2]));
+console.log(primeNumber (process.argv[2]))

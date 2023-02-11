@@ -38,63 +38,88 @@ const goods = [
         sizes: ['S', 'M', 'L', 'XL'],
         price: 800,
         available: true,
-    }
+    },
 ];
 
-const bucket = [
+const basket = [
     {
-        userId: 0,
-        goodIds: [1, 3, 5],
-        sizes: ['S', 'M', 'L'],
-        amounts: [2, 4, 6],
+        good: 3,
+        amount: 2,
     },
     {
-        userId: 1,
-        goodIds: [5],
-        sizes: ['L'],
-        amounts: [7],
-    }
+        good: 1,
+        amount: 4,
+    },
 ];
 
-function addGood (userId, goodId, size, amount) {
-    bucket[userId].goodIds.push(goodId);
-    bucket[userId].sizes.push(size);
-    bucket[userId].amounts.push(amount);
-}
-
-function deleteGood (userId, ordinalNumber) {
-    bucket[userId].goodIds.shift(2);
-    bucket[userId].sizes.shift(2);
-    bucket[userId].amounts.shift(2);
-}
-
-function clearBucket (userId) {
-    bucket[userId].goodIds = [];
-    bucket[userId].sizes = [];
-    bucket[userId].amounts = [];
-}
-
-function goodsTotalPrice (userId) {
-    totalPrice = 0;
-    for (let i=0; i < bucket[userId].goodIds.length; i++) {
-        totalPrice = totalPrice + (goods[bucket[userId].goodIds[i]-1].price * bucket[userId].amounts[i])
+function addGood (good, amount) {
+    let iter = {
+        good: good,
+        amount: amount,
     }
-    console.log(totalPrice)
-}
 
-goodsTotalPrice(0)
-addGood(0, 5, 'S', 2)
-console.log(bucket)
-goodsTotalPrice(0)
+    for (i = 0; i < basket.length; i++) {
+        if (iter.good == basket[i].good) {
+            console.log(basket[i].amount)
+            console.log(iter.amount)
+            basket[i].amount += iter.amount
+            break;
+        } else if (i + 1 == basket.length) {
+            basket.push(iter)
+            break;
+        }
+    }
+};
 
-deleteGood(0, 2)
-console.log(bucket)
-goodsTotalPrice(0)
+function deleteGood (good) {
+    for (i = 0; i < basket.length; i++) {
+        if (basket[i].good == good) {
+            basket.splice(i, 1)
+        }
+    }
+};
 
+function clearBasket () {
+    basket.splice(0, basket.length)
+};
 
-goodsTotalPrice(1)
-clearBucket(1)
-console.log(bucket)
-goodsTotalPrice(1)
+function totalPrice () {
+    totalAmount = 0
+    totalSumm = 0
+    for (i = 0; i < basket.length; i++) {
+        for (j = 0; j <= goods.length - 1; j++) {
+            if (basket[i].good == goods[j].id) {
+                totalSumm += basket[i].amount * goods[j].price
+                totalAmount += 1
+            }
+        }
+    }
+    answer = {
+        'totalAmount': totalAmount,
+        'totalSumm': totalSumm,
+    }
+    return answer
+};
 
+totalPrice()
+console.log(basket)
+addGood(2, 7)
 
+totalPrice()
+console.log(basket)
+addGood(2, 7)
+
+totalPrice()
+console.log(basket)
+addGood(1, 90)
+
+totalPrice()
+console.log(basket)
+deleteGood(1)
+
+totalPrice()
+console.log(basket)
+clearBasket()
+
+totalPrice()
+console.log(basket)

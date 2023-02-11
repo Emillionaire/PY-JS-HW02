@@ -1,3 +1,4 @@
+// Goods list
 const goods = [
     {
         id: 1,
@@ -41,6 +42,7 @@ const goods = [
     },
 ];
 
+// Basket content
 const basket = [
     {
         good: 3,
@@ -52,6 +54,7 @@ const basket = [
     },
 ];
 
+// Add good to basket
 function addGood (good, amount) {
     let iter = {
         good: good,
@@ -71,6 +74,7 @@ function addGood (good, amount) {
     }
 };
 
+// Delete good from basket
 function deleteGood (good) {
     for (i = 0; i < basket.length; i++) {
         if (basket[i].good == good) {
@@ -79,10 +83,12 @@ function deleteGood (good) {
     }
 };
 
+// Clear all goods from basket
 function clearBasket () {
     basket.splice(0, basket.length)
 };
 
+// Calculate basket total price and amount of goods
 function totalPrice () {
     totalAmount = 0
     totalSumm = 0
@@ -101,6 +107,7 @@ function totalPrice () {
     return answer
 };
 
+// Call function
 totalPrice()
 console.log(basket)
 addGood(2, 7)
